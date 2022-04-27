@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS - Начало</title>
+</head>
+<body>
+     <script>
+        // alert("Привет, мир!");
+        // document.write("Привет,мир!");
+        // console.log("Привет,мир!");
+        // let name = "Ivan";
+        // name = "Alex";
+        // console.log("Hello, " + name);
+        // 
+        // let a;
+        // a = 12;
+        // let b;
+        // b=4;
+        // let a = +prompt("Введите число: ");
+        // let b = +prompt("Введите число: ");
+        // a = parseInt(a);
+        // b = parseInt(b);
+        // a = Number(a);
+        // b = Number(b);
+
+        // console.log("a=" + a + " | b=" + b);
+        // console.log("Сложение: " + (a + b));
+        // console.log("Умножение: " + a * b);
+        // console.log("Вычитание: " + (a - b));
+        // console.log("Деление: " + a / b);
+        // console.log("Возведение в степень: " + a ** b);
+        // console.log("Остаток от деления: " + (a % b));
+
+        // Задание по JS. № 1.
+        // let kurs_$ =  prompt("Введите Курс доллара: ");
+        // let kurs_evro =  prompt("Введите Курс евро: ");
+        // let perevod_rubley = prompt("Сколько рублей вы хотите сконвертировать?");
+        // console.log("1 доллар =" + Number(kurs_$) + " рубля(лей)");
+        // console.log("1 евро =" + Number(kurs_evro) + " рубля(лей)");
+        // console.log("Вы хотите сконвертировать " + Number(perevod_rubley) + " рубля(лей)");
+        // alert( Math.floor(perevod_rubley / kurs_$*100)/100 + " доллара(ов) или " + Math.floor(perevod_rubley / kurs_evro*100)/100 + " евро" );
+        // Конец задания по JS. № 1.
+
+         // Задание по JS. № 2.
+        // let a =  +prompt("Введите длину первого основания трапеции: ");
+        // let b =  +prompt("Введите длину второго основания трапеции: ");
+        // let h = +prompt("Введите высоту трапеции: ");
+        // let s = ((a+b)/2)*h;
+        // console.log("Площадь трапеции будет равна " + s);
+        // Конец задания по JS. № 2.
+
+
+        // Задание по JS. № 3.
+        // let a = 10;
+        // let b =  3;
+        // console.log("Остаток от деления a на b равен " + a%b);
+        // Конец задания по JS. № 3.
+
+
+
+        // Задание по JS. № 5.
+        // let a =  +prompt("Который час? Введите часы: ");
+        // let b =  +prompt("Который час? Введите минуты: ");
+        // let sec = a*3600+b*60;
+        // let min = a*60+b;
+        // let minDoPolunochi=24*60 - min;
+        // console.log("Cколько секунд прошло с полуночи до «данного момента» " + sec);
+        // console.log("Cколько минут прошло с полуночи до «данного момента» " + min);
+        // console.log("Cколько минут осталось до полуночи» " + minDoPolunochi);
+        // Конец задания по JS. № 5.
+
+        // Задание по JS. № 8.
+        // let a= +prompt("Введите переменную a ");
+        // let b= +prompt("Введите переменную b ");
+        // if(a%b===0) {
+        //     console.log("Делится");
+        // } else {
+        //     console.log("Делится c остатком " + a%b);
+        // }
+        // Конец задания по JS. № 8.
+
+
+        // Задание по JS. № 10.
+        // let min = +prompt("Введите переменную min от 0 до 59 ");
+        // if(min >=0 && min<15) {
+        //     console.log("Число min находится в первой четверти часа" );
+        // }
+        // if(min >=15 && min<30) {
+        //     console.log("Число min находится во второй четверти часа" );
+        // }
+        // if(min >=30 && min<45) {
+        //     console.log("Число min находится в третьей четверти часа" );
+        // }
+        // if(min >=45 && min<=59) {
+        //     console.log("Число min находится в четвертой четверти часа" );
+        
+        // Конец задания по JS. № 10.
+
+
+// Начало задания по JS. № 12.
+
+        // let massiv = [-5, 4, -50, 0, 15, 5, -8, 10, 3, 1];
+        // let massiv2 = [];
+        // for(let i = 0; i< massiv.length; i++) {
+        //     if(massiv[i]>0 && massiv[i]<10) {
+        //         massiv2.push(massiv[i]);  
+        //     }
+        // }
+        // console.log(massiv2);
+// Конец задания по JS. № 12.
+
+
+// Начало задания по JS. № 13.
+
+// let massiv = [-5, -5, -5, 0, 14, 15, -8, -8, 3, 1, 1];
+// let x=0;
+// for(let i = 0; i< massiv.length-1; i++) {
+//     if(massiv[i]==massiv[(i+1)]) {
+//      x++;
+//    } 
+// }
+//     if(x>0) {
+//         console.log("да");
+//     } else {
+//         console.log("нет");
+    // }
+
+      
+// Конец задания по JS. № 13.
+
+// Начало задания по JS. № 17.
+
+// function iqualNum(num1, num2) {
+//     if(num1===num2) {
+//         console.log("true");
+//     }else {
+//         console.log("false");   
+//     }
+// }
+// let a = iqualNum(4, 4);
+// let b = iqualNum(4, 5);
+
+
+// function iqualNum(num1, num2) {
+//     if(num1===num2) {
+//         return true;
+//     }else {
+//         return false;   
+//     }
+// }
+// let a = iqualNum(4, 4);
+// let b = iqualNum(4, 5);
+
+
+      
+// Конец задания по JS. № 17.
+
+
+
+
+
+// Начало задания по JS. № 18.
+
+    
+    // let array = [2, 4, 6, 8, 10, 12, 6, 14, 16, 18, 19];
+    //     function numArray() {
+    //         console.log(array[0]);
+    //         array.splice(0, 1);
+    //         if (array.length > 0) {
+    //             numArray(array);
+    //         }
+    //     }
+    //     numArray();
+
+
+
+        // let array = [2, 4,8, 6, 8, 10, 12, 6, 14, 16, 18, 19];
+        // let i=0;
+        // function stepArray() {
+            
+        //     console.log(array[i]);
+        //     i++;
+        //     if (i<array.length) {
+        //         stepArray(array);
+        //     }
+        // }
+        // stepArray(array);
+
+ // Конец задания по JS. № 18.
+
+
+
+
+
+
+ // Начало задания по JS. № 20.
+ 
+ 
+    function arrayFill(value, count) {
+            let array = [];
+            for (let i = 0; i < count; i++) {
+                array.push(value);
+            }
+            alert(array);
+        } 
+
+
+
+  // Конец задания по JS. № 20.
+
+
+
+
+
+    </script>
+</body>
+</html>

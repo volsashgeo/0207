@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Домашнее задание</title>
+    <style>
+        .container {
+            display: flex;
+            margin: 100px;
+        }
+
+        #sq1,
+        #sq2,
+        #sq3 {
+            display: flex;
+            width: 100px;
+            height: 100px;
+            margin-top: 10px;
+            border: black solid 5px;
+            display: flex;
+        }
+
+        #sq_big {
+            width: 250px;
+            height: 250px;
+            margin-top: 10px;
+            border: black solid 5px;
+            position: absolute;
+            flex-direction: row;
+            margin-left: 200px;
+            /* z-index: 1; */
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="column">
+            <div class="row " style="background-Color : red" id="sq1"></div>
+            <div class="row " style="background-Color : green" id="sq2"></div>
+            <div class="row " style="background-Color : yellow" id="sq3" hidden></div>
+
+        </div>
+        <div class="column" style="background-Color : gray" id="sq_big"></div>
+    </div>
+
+
+    <script>
+        //let squares = document.querySelectorAll("id[src$='sq']");
+        let sq1 = document.getElementById("sq1");
+        let sq2 = document.getElementById("sq2");
+        let sq3 = document.getElementById("sq3");
+        let square = [sq1, sq2, sq3];     // положил в массив три квадрата
+        console.log(square);
+
+        let sq_big = document.getElementById("sq_big");
+
+        let bigBackColor = sq_big.style.backgroundColor;
+        let sq1BackColor = sq1.style.backgroundColor;
+        let sq2BackColor = sq2.style.backgroundColor;
+        let sq3BackColor = sq3.style.backgroundColor;
+
+        //Движение и позиционирование квадратов
+        function moveAt(event) {
+            let x = event.clientX - 50;
+            let y = event.clientY - 50;
+            square.style.top = y + "px";
+            square.style.left = x + "px";
+        }
+
+        for (let i = 0; i < square.length; i++) {
+            square[i].onmousedown = function (e) {
+                square[i] = e.currentTarget;
+                square[i].style.position = "absolute";
+                square[i].style.zIndex = 10;
+
+                document.addEventListener("mousemove", moveAt); //Устанавливаем слушателя на событие mousemove
+                // Устанавливаем слушателя на онмаусдаун
+                square[i].onmouseup = function () {
+                    //Удаляем слушателя по событию onmouseup
+                    document.removeEventListener("mousemove", moveAt);
+                    // square[i].style.zIndex = 2;
+                    // находим координаты большого квадрата и маленьких
+                    let square_top = square[i].getBoundingClientRect().top;
+                    let square_left = square[i].getBoundingClientRect().left;
+                    let square_right = square[i].getBoundingClientRect().right;
+                    let square_bottom = square[i].getBoundingClientRect().bottom;
+                    let sq_big_top = sq_big.getBoundingClientRect().top;
+                    let sq_big_left = sq_big.getBoundingClientRect().left;
+                    let sq_big_right = sq_big.getBoundingClientRect().right;
+                    let sq_big_bottom = sq_big.getBoundingClientRect().bottom;
+                    let bg_color = square[i].style.backgroundColor;
+                    // function hide() {
+                    //     square[i].hidden = true;
+                    // }
+                    // проверяем условие вхождения маленьких квадратов в большой
+                    if (square_top > sq_big_top && square_left > sq_big_left && square_right < sq_big_right && square_bottom < sq_big_bottom) {
+                        sq_big.style.backgroundColor = bg_color;
+                        square[i].style.backgroundColor = "transparent";
+                        square[i].style.border = "transparent";
+                        square[i].hidden = true; // Почему-то с hidden  квадратики не исчезают 
+
+                    }
+                };
+                //Движение и позиционирование квадратов
+                function moveAt(event) {
+                    let x = event.clientX - 50;
+                    let y = event.clientY - 50;
+                    square[i].style.top = y + "px";
+                    square[i].style.left = x + "px";
+                }
+                // Отменяем стандартное поведение браузера
+                square[i].ondragstart = function () {
+                    return false;
+                };
+            };
+        }
+
+    </script>
+</body>
+
+</html>

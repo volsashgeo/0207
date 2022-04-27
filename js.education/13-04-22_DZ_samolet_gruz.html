@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Домашнее задание с DOM</title>
+    <style>
+        #planeImg {
+            position: absolute;
+        }
+
+        #cargoImg {
+            position: absolute;
+            margin-top: 140px;
+            padding-left: 49%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <img src="/img/plane.png" alt="Cамолет" id="planeImg">
+    <img src="/img/cargo.png" alt="Груз" id="cargoImg" hidden>
+
+
+
+    <script>
+        let plane = document.getElementById("planeImg");
+        let cargo = document.getElementById("cargoImg");
+        let step = 0;
+        let flag = true;
+        let stepCargo = 0;
+
+        function showCargo() {
+            document.getElementById("cargoImg").hidden = false;
+        }
+
+
+        function animaPlane() {
+            if (window.innerWidth - 240 > step && flag) {
+                planeImg.style.transform = "scaleX(1)"
+                step += 1;
+
+            } else {
+                planeImg.style.transform = "scaleX(-1)"
+                step -= 1;
+                flag = step == 0 ? true : false;
+            }
+            if (Math.round(window.innerWidth / 2) == step + 222) {
+
+                showCargo() // показать груз
+
+                function animaCargo() {
+                    if (window.innerHeight - 150 > stepCargo) {
+
+                        cargoImg.style.top = (stepCargo - 50) + "px";
+                        stepCargo += 1;
+
+                    } else {
+                        cargoImg.style.top = (window.innerHeight - 220) + "px";
+                    }
+                };
+                setInterval(animaCargo, 5);
+            }
+            planeImg.style.left = step + "px";
+        }
+
+        setInterval(animaPlane, 10);
+
+
+    </script>
+
+</body>
+
+</html>
