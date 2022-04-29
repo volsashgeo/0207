@@ -93,13 +93,13 @@
                 cancel_buttons[i].hidden = true;
                 edit_buttons[i].hidden = false;
 
-                let FormData = new FormData();
-                FormData.append("value", newInputValue);
-                FormData.append("item", save_buttons[i].dataset.item);
+                let formData = new FormData();
+                formData.append("value", newInputValue);
+                formData.append("item", save_buttons[i].dataset.item);
 
                 let response = await fetch("php/lk_obr.php", {
                     method: "POST",
-                    body: FormData,
+                    body: formData,
                 });
             });
 
