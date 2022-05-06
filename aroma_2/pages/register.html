@@ -16,6 +16,11 @@
   <link rel="stylesheet" href="vendors/nouislider/nouislider.min.css">
 
   <link rel="stylesheet" href="css/style.css">
+  <style>
+	  .modal {
+		  top: 15rem;
+	  }
+  </style>
 </head>
 <body>
 	<!--================ Start Header Menu Area =================-->
@@ -109,19 +114,29 @@
 				</div>
 				<div class="col-lg-6">
 					<div class="login_form_inner register_form_inner">
-						<h3>Create an account</h3>
-						<form class="row login_form" action="#/" id="register_form" >
+						<h3>Регистрация</h3>
+						<form class="row login_form" action="#/" id="register_form" onsubmit="sendForm(this); return false;">
 							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="name" name="name" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'">
+								<input type="text" class="form-control" id="name" name="name" placeholder="Имя" onfocus="this.placeholder = ''"
+									onblur="this.placeholder = 'Username'">
 							</div>
 							<div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="email" name="email" placeholder="Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address'">
-              </div>
-              <div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="password" name="password" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
-              </div>
-              <div class="col-md-12 form-group">
-								<input type="text" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Confirm Password'">
+								<input type="text" class="form-control" id="lastname" name="lastname" placeholder="Фамилия"
+									onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'">
+							</div>
+							<div class="col-md-12 form-group">
+								<input type="email" class="form-control" id="email" name="email" placeholder="Email"
+									onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email Address'">
+							</div>
+							<p id="info" style="color:red"></p>
+							<div class="col-md-12 form-group">
+								<input type="password" class="form-control" id="pass" name="pass" placeholder="Пароль"
+									onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
+							</div>
+							<div class="col-md-12 form-group">
+								<input type="text" class="form-control" id="confirmPassword" name="confirmPassword"
+									placeholder="Confirm Password" onfocus="this.placeholder = ''"
+									onblur="this.placeholder = 'Confirm Password'">
 							</div>
 							<div class="col-md-12 form-group">
 								<div class="creat_account">
@@ -130,7 +145,7 @@
 								</div>
 							</div>
 							<div class="col-md-12 form-group">
-								<button type="submit" value="submit" class="button button-register w-100">Register</button>
+								<button type="submit" value="submit" class="button button-register w-100">Зарегистрироваться</button>
 							</div>
 						</form>
 					</div>
@@ -139,7 +154,24 @@
 		</div>
 	</section>
 	<!--================End Login Box Area =================-->
-
+  
+  <!-- Модальное окно -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="exampleModalLabel">Вы успешно зарегистрированы!</h5>
+		  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+		  </button>
+		</div>
+		<div class="modal-body">
+		  Вы будете перенаправлены на форму авторизации через 3 секунды.
+		</div>
+		
+	  </div>
+	</div>
+  </div>
 
 
   <!--================ Start footer Area  =================-->	
@@ -223,14 +255,16 @@
 			<div class="container">
 				<div class="row d-flex">
 					<p class="col-lg-12 footer-text text-center">
-						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+						 Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+
 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+				<!--================ End footer Area  =================-->
 				</div>
 			</div>
 		</div>
-	</footer> -->
-	<!--================ End footer Area  =================-->
+	</footer> 
+	
+	
 
 
 
@@ -242,5 +276,30 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
   <script src="vendors/jquery.ajaxchimp.min.js"></script>
   <script src="vendors/mail-script.js"></script>
   <script src="js/main.js"></script>
+  <script>
+	async function sendForm(form) {
+		info.innerText = ``;
+		let formData = new FormData(form);
+
+		let response = await fetch("addUser", {
+			method:"POST",
+			body: formData,
+		});
+		// console.log(await response.json());
+		let res = await response.json();
+		if(res.result == "success") {
+			$('#exampleModal').modal('show');
+			setTimeout(()=> {
+				location.href = "auth";
+			}, 3000);
+		}else if(res.result == "exist") {
+			info.innerText = `Такой пользователь уже есть!`;
+		}else {
+			alert("Что-то пошло не так .Попробуйте еще раз.");
+		}
+
+		// $('#myModal').modal('show')
+	}
+</script>
 </body>
 </html>
