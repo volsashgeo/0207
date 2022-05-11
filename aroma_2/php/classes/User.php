@@ -52,21 +52,40 @@ class User {
     // Cтатический метод авторизации пользователя
     static function authUser($email, $pass) {
         global $mysqli;
-        // return "Авторизован"; //Здесь написать функционал авторизации
         $email = trim(mb_strtolower($email));
         $pass = trim($pass);
-        $pass = password_hash($pass, PASSWORD_DEFAULT);
+        // $pass = password_hash($pass, PASSWORD_DEFAULT);
     
-        $result = $mysqli->query("SELECT * FROM `users` WHERE `email` = '$email' /* AND `pass` = '$pass' */ ");
+        $result = $mysqli->query("SELECT * FROM `users` WHERE `email` = '$email'");
+        $result = $result->fetch_assoc();
         // var_dump ($result->num_rows);
-        
-        if($result->num_rows == 0) {
-            return json_encode(["result"=>"not_exist"]);
-    
-        }else {
+        if(password_verify($pass, $result["pass"])) {
+            $_SESSION["id"] = $result["id"];
             return json_encode(["result"=>"ok"]);
+        } else {
+            return json_encode(["result"=>"not_exist"]);
         }
     }
+        // Cтатический метод получения пользователя
+        static function getUser($userID)
+        {
+          global $mysqli;
+          $result = $mysqli->query("SELECT * FROM `users` WHERE `id` = '$userID'");
+          $result = $result->fetch_assoc();
+          return json_encode($result);
+        }
+        //Статический метод получения пользователей
+        static function getUsers()
+        {
+          global $mysqli;
+          $result = $mysqli->query("SELECT `name`, `lastname`, `email`, `id` FROM `users` WHERE 1");
+      
+          while ($row = $result->fetch_assoc()) {
+            $users[] = $row;
+          }
+          return json_encode($users);
+        }
+    
 }
 
 
